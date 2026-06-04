@@ -1,0 +1,21 @@
+# Input the secret number between 1 and 50
+number = int(input("Enter a number between 1 and 50: "))
+
+# Loop to keep taking guesses
+while(number > 1 or number < 50):
+
+    # Input user's guess
+    guess = int(input("Enter your guess: "))
+
+    # Check if guess is less than the secret number
+    if(guess < number):
+        print("Too low")
+
+    # Check if guess is greater than the secret number
+    elif(guess > number):
+        print("Too high")
+
+    # If guess matches the secret number
+    else:
+        print("Correct guess")
+        break   # Exit the loop when correct guess is found
