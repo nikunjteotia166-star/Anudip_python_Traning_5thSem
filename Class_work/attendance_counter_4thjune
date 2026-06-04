@@ -1,0 +1,7 @@
+#program that counts  the no. of students entering the classroom and display the attendance counts
+student_count = 0
+while(student_count <30):
+     student_count += 1
+     print("total_student=" , student_count)
+#---------------------------------------------
+print("all students have entered the classroom")
