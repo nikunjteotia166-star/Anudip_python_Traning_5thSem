@@ -1,0 +1,42 @@
+# Initial balance
+balance = 10000
+
+# Repeat menu until user chooses Exit
+while True:
+
+    print("\n----- MENU -----")
+    print("1. Check Balance")
+    print("2. Deposit")
+    print("3. Withdraw")
+    print("4. Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    # Check balance
+    if choice == 1:
+        print("Current Balance = ₹", balance)
+
+    # Deposit money
+    elif choice == 2:
+        amount = int(input("Enter amount to deposit: "))
+        balance = balance + amount
+        print("Amount Deposited Successfully!")
+
+    # Withdraw money
+    elif choice == 3:
+        amount = int(input("Enter amount to withdraw: "))
+
+        if amount <= balance:
+            balance = balance - amount
+            print("Withdrawal Successful!")
+        else:
+            print("Insufficient Balance!")
+
+    # Exit
+    elif choice == 4:
+        print("Thank You!")
+        break
+
+    # Invalid choice
+    else:
+        print("Invalid Choice!")
