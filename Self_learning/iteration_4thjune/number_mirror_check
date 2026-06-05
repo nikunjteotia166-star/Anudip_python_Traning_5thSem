@@ -1,0 +1,26 @@
+# Input a number from the user
+num = input("Enter a number: ")
+
+# Find the length of the number
+length = len(num)
+
+# Check if the number has even digits
+if length % 2 == 0:
+    
+    # Find the middle position
+    mid = length // 2
+
+    # Extract left half
+    left_half = num[:mid]
+
+    # Extract right half
+    right_half = num[mid:]
+
+    # Compare both halves
+    if left_half == right_half:
+        print("Left half and right half are identical.")
+    else:
+        print("Left half and right half are not identical.")
+
+else:
+    print("Please enter a number with an even number of digits.")
