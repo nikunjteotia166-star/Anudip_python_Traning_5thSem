@@ -1,0 +1,38 @@
+# List of stock quantities
+stock = [25, 5, 0, 12, 3, 18, 0, 30]
+
+# 1. Count products that are out of stock (quantity = 0)
+out_of_stock = 0
+
+for qty in stock:
+    if qty == 0:
+        out_of_stock += 1
+
+print("Out of Stock Products:", out_of_stock)
+
+# 2. Display products that need restocking (quantity < 10)
+restock = []
+
+for qty in stock:
+    if qty < 10:
+        restock.append(qty)
+
+print("Restock Required:", restock)
+
+# 3. Count available products (quantity > 0)
+available = 0
+
+for qty in stock:
+    if qty > 0:
+        available += 1
+
+print("Available Products:", available)
+
+# 4. Create a new list with stock >= 15
+healthy_stock = []
+
+for qty in stock:
+    if qty >= 15:
+        healthy_stock.append(qty)
+
+print("Healthy Stock:", healthy_stock)
