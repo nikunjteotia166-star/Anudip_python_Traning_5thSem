@@ -1,0 +1,41 @@
+# List of employees
+employees = [
+    ("Rahul", 35000),
+    ("Priya", 55000),
+    ("Amit", 42000),
+    ("Neha", 65000)
+]
+
+# Display employees earning above ₹50,000
+print("Employees Earning Above ₹50,000:")
+
+for emp in employees:
+    if emp[1] > 50000:
+        print(emp[0], emp[1])
+
+# Find highest-paid employee
+highest = employees[0]
+
+for emp in employees:
+    if emp[1] > highest[1]:
+        highest = emp
+
+print("\nHighest-Paid Employee:")
+print(highest[0], highest[1])
+
+# Calculate total salary expenditure
+total_salary = 0
+
+for emp in employees:
+    total_salary += emp[1]
+
+print("\nTotal Salary Expenditure:", total_salary)
+
+# Count employees earning below ₹40,000
+count = 0
+
+for emp in employees:
+    if emp[1] < 40000:
+        count += 1
+
+print("\nEmployees Earning Below ₹40,000:", count)
