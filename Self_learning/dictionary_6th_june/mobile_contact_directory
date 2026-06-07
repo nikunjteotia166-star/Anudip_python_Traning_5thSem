@@ -1,0 +1,48 @@
+# Mobile Contact Directory
+
+contacts = {
+    "Amit": "9876543210",
+    "Priya": "9876543211",
+    "Rohan": "9876543212",
+    "Neha": "9876543213",
+    "Anjali": "9876543214",
+    "Karan": "9876543215",
+    "Pooja": "9876543216",
+    "Arjun": "9876543217",
+    "Sneha": "9876543218",
+    "Rahul": "9876543219"
+}
+
+# 1. Display all contact names in alphabetical order
+print("Contact Names in Alphabetical Order:")
+for name in sorted(contacts):
+    print(name)
+
+# 2. Count the total number of contacts
+print("\nTotal Contacts:", len(contacts))
+
+# 3. Search for a given contact name
+search_name = input("\nEnter contact name to search: ")
+
+found = False
+
+for name, number in contacts.items():
+    if name == search_name:
+        print("Contact Found!")
+        print("Name:", name)
+        print("Number:", number)
+        found = True
+        break   # Stop searching once found
+
+if not found:
+    print("Contact not found.")
+
+# 4. Create a list of contacts whose names start with a vowel
+vowel_contacts = []
+
+for name in contacts:
+    if name[0].lower() in ['a', 'e', 'i', 'o', 'u']:
+        vowel_contacts.append(name)
+
+print("\nContacts starting with a vowel:")
+print(vowel_contacts)
