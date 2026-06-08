@@ -1,0 +1,87 @@
+# Smart Electricity Billing System
+
+units = {
+    "House101": 320,
+    "House102": 180,
+    "House103": 510,
+    "House104": 275,
+    "House105": 150,
+    "House106": 430,
+    "House107": 220,
+    "House108": 390,
+    "House109": 145,
+    "House110": 600
+}
+
+# 1. Display houses consuming more than 400 units
+print("Houses Consuming More Than 400 Units:")
+for house, unit in units.items():
+    if unit > 400:
+        print(house)
+
+# 2. Find the highest-consuming house
+highest_house = ""
+highest_units = 0
+
+for house, unit in units.items():
+    if unit > highest_units:
+        highest_units = unit
+        highest_house = house
+
+print("\nHighest Consumption:")
+print(highest_house, "(", highest_units, "units)", sep="")
+
+# 3. Find the lowest-consuming house
+lowest_house = ""
+lowest_units = list(units.values())[0]
+
+for house, unit in units.items():
+    if unit < lowest_units:
+        lowest_units = unit
+        lowest_house = house
+
+print("\nLowest Consumption:")
+print(lowest_house, "(", lowest_units, "units)", sep="")
+
+# 4. Calculate total units consumed
+total_units = 0
+
+for unit in units.values():
+    total_units += unit
+
+print("\nTotal Units Consumed:", total_units)
+
+# 5. Create lists according to consumption
+
+low = []
+medium = []
+high = []
+
+for house, unit in units.items():
+
+    if unit < 200:
+        low.append(house)
+
+    elif 200 <= unit <= 400:
+        medium.append(house)
+
+    else:
+        high.append(house)
+
+print("\nLow Consumption:")
+print(low)
+
+print("\nMedium Consumption:")
+print(medium)
+
+print("\nHigh Consumption:")
+print(high)
+
+# 6. Count houses eligible for energy-saving campaign
+count = 0
+
+for unit in units.values():
+    if unit > 300:
+        count += 1
+
+print("\nEligible for Energy-Saving Campaign:", count)
