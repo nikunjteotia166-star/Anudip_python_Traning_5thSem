@@ -1,0 +1,55 @@
+# Vehicle Number Plate Analysis
+
+vehicle_no = "MH12AB4589"
+
+# 1. Extract state code
+state_code = vehicle_no[:2]
+
+# 2. Extract district code
+district_code = vehicle_no[2:4]
+
+# 3. Extract vehicle series
+series = vehicle_no[4:6]
+
+# 4. Extract vehicle number
+vehicle_number = vehicle_no[6:]
+
+# 5. Count letters and digits
+letter_count = 0
+digit_count = 0
+
+for ch in vehicle_no:
+    if ch.isalpha():
+        letter_count += 1
+    elif ch.isdigit():
+        digit_count += 1
+
+# 6. Verify vehicle number format
+valid = True
+
+if not vehicle_no[:2].isalpha():
+    valid = False
+
+if not vehicle_no[2:4].isdigit():
+    valid = False
+
+if not vehicle_no[4:6].isalpha():
+    valid = False
+
+if not vehicle_no[6:].isdigit() or len(vehicle_no[6:]) != 4:
+    valid = False
+
+# 7. Display Results
+print("Vehicle Number:", vehicle_no)
+print("State Code:", state_code)
+print("District Code:", district_code)
+print("Series:", series)
+print("Vehicle Number:", vehicle_number)
+
+print("\nTotal Letters:", letter_count)
+print("Total Digits:", digit_count)
+
+if valid:
+    print("\nVehicle Number Status: Valid")
+else:
+    print("\nVehicle Number Status: Invalid")
