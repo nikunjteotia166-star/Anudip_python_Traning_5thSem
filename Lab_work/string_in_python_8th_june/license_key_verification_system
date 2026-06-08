@@ -1,0 +1,52 @@
+# Software License Key Analysis
+
+license_key = "ABCD-EFGH-IJKL-MNOP"
+
+# 1 & 6. Create a list containing all groups
+groups = license_key.split("-")
+
+# Verify number of groups
+group_count = len(groups)
+
+# 2. Verify each group contains exactly 4 characters
+valid = True
+
+if group_count != 4:
+    valid = False
+
+for group in groups:
+    if len(group) != 4:
+        valid = False
+
+# 3. Count total letters
+letter_count = 0
+
+for ch in license_key:
+    if ch.isalpha():
+        letter_count += 1
+
+# 4. Count vowels
+vowel_count = 0
+
+for ch in license_key.upper():
+    if ch in "AEIOU":
+        vowel_count += 1
+
+# 5. Remove hyphens and display merged key
+merged_key = license_key.replace("-", "")
+
+# Display Results
+print("License Key:", license_key)
+
+print("\nGroups:", groups)
+print("Number of Groups:", group_count)
+
+print("\nTotal Letters:", letter_count)
+print("Total Vowels:", vowel_count)
+
+print("\nMerged Key:", merged_key)
+
+if valid:
+    print("\nLicense Key Status: Valid")
+else:
+    print("\nLicense Key Status: Invalid")
