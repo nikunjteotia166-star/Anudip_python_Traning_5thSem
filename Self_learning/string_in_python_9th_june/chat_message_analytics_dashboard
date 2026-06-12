@@ -1,0 +1,144 @@
+# Chat Message Analytics Dashboard
+
+messages = [
+    "Hello how are you",
+    "Python is very easy to learn",
+    "I am learning dictionaries today",
+    "Data science is interesting",
+    "Machine learning uses data",
+    "Artificial intelligence is powerful",
+    "Good morning everyone",
+    "Have a nice day",
+    "Practice makes a person perfect",
+    "Coding improves problem solving skills",
+    "Keep learning new things",
+    "Chat applications are useful",
+    "Programming requires logical thinking",
+    "Education changes lives",
+    "Success comes with hard work",
+    "Always stay positive",
+    "Technology is growing rapidly",
+    "Teamwork leads to success",
+    "Communication skills are important",
+    "Never stop exploring knowledge"
+]
+
+word_freq = {}
+
+total_words_all = 0
+
+longest_message = messages[0]
+shortest_message = messages[0]
+
+# Analyze each message
+for msg in messages:
+
+    words = msg.split()
+
+    print("\nMessage :", msg)
+
+    # 1. Count total words
+    print("Total Words :", len(words))
+
+    # 2. Count total characters
+    print("Total Characters :", len(msg))
+
+    total_words_all += len(words)
+
+    # Longest and shortest message
+    if len(msg) > len(longest_message):
+        longest_message = msg
+
+    if len(msg) < len(shortest_message):
+        shortest_message = msg
+
+    vowels = 0
+    consonants = 0
+
+    # 3. Count vowels and consonants
+    for ch in msg.lower():
+
+        if ch.isalpha():
+
+            if ch in "aeiou":
+                vowels += 1
+            else:
+                consonants += 1
+
+    print("Vowels :", vowels)
+    print("Consonants :", consonants)
+
+    # 4. Find longest word
+    longest_word = words[0]
+
+    for word in words:
+        if len(word) > len(longest_word):
+            longest_word = word
+
+    print("Longest Word :", longest_word)
+
+    # 5. Find shortest word
+    shortest_word = words[0]
+
+    for word in words:
+        if len(word) < len(shortest_word):
+            shortest_word = word
+
+    print("Shortest Word :", shortest_word)
+
+    # 6 & 10. Word Frequency Dictionary
+    for word in words:
+
+        word = word.lower()
+
+        if word in word_freq:
+            word_freq[word] += 1
+        else:
+            word_freq[word] = 1
+
+# 7. Repeated Words
+print("\n===== REPEATED WORDS =====")
+
+for word, count in word_freq.items():
+    if count > 1:
+        print(word, "->", count)
+
+# 8. Words Starting With Vowels
+print("\n===== WORDS STARTING WITH VOWELS =====")
+
+for word in word_freq:
+    if word[0] in "aeiou":
+        print(word)
+
+# 9. Words Longer Than 5 Characters
+print("\n===== WORDS LONGER THAN 5 CHARACTERS =====")
+
+for word in word_freq:
+    if len(word) > 5:
+        print(word)
+
+# 10. Word Frequency Dictionary
+print("\n===== WORD FREQUENCY DICTIONARY =====")
+print(word_freq)
+
+# Challenge
+
+# Most Frequently Used Word
+max_word = ""
+max_count = 0
+
+for word, count in word_freq.items():
+
+    if count > max_count:
+        max_count = count
+        max_word = word
+
+# Average Words Per Message
+avg_words = total_words_all / len(messages)
+
+print("\n===== CHAT ANALYTICS REPORT =====")
+print("Most Frequently Used Word :", max_word)
+print("Frequency :", max_count)
+print("Longest Message :", longest_message)
+print("Shortest Message :", shortest_message)
+print("Average Words Per Message :", round(avg_words, 2))
