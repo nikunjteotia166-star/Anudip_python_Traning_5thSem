@@ -1,0 +1,148 @@
+# Cricket Tournament Analytics System
+
+players = {
+    "Virat": {"runs": 645, "matches": 12, "wickets": 0},
+    "Rohit": {"runs": 580, "matches": 12, "wickets": 1},
+    "Gill": {"runs": 520, "matches": 11, "wickets": 0},
+    "KL Rahul": {"runs": 450, "matches": 10, "wickets": 0},
+    "Hardik": {"runs": 390, "matches": 11, "wickets": 9},
+    "Jadeja": {"runs": 340, "matches": 12, "wickets": 12},
+    "Ashwin": {"runs": 180, "matches": 10, "wickets": 15},
+    "Bumrah": {"runs": 60, "matches": 12, "wickets": 20},
+    "Shami": {"runs": 40, "matches": 11, "wickets": 18},
+    "Siraj": {"runs": 55, "matches": 12, "wickets": 16},
+    "Pant": {"runs": 470, "matches": 10, "wickets": 0},
+    "Iyer": {"runs": 430, "matches": 11, "wickets": 0},
+    "Surya": {"runs": 390, "matches": 10, "wickets": 1},
+    "Kishan": {"runs": 280, "matches": 9, "wickets": 0},
+    "Chahal": {"runs": 30, "matches": 10, "wickets": 14},
+    "Kuldeep": {"runs": 45, "matches": 11, "wickets": 17},
+    "Axar": {"runs": 250, "matches": 10, "wickets": 8},
+    "Washington": {"runs": 210, "matches": 9, "wickets": 7},
+    "Rinku": {"runs": 310, "matches": 8, "wickets": 0},
+    "Jaiswal": {"runs": 500, "matches": 11, "wickets": 0},
+    "Samson": {"runs": 350, "matches": 9, "wickets": 0},
+    "Gaikwad": {"runs": 410, "matches": 10, "wickets": 0},
+    "Arshdeep": {"runs": 25, "matches": 10, "wickets": 13},
+    "Avesh": {"runs": 20, "matches": 8, "wickets": 9},
+    "Mukesh": {"runs": 15, "matches": 7, "wickets": 6},
+    "Tilak": {"runs": 295, "matches": 8, "wickets": 2},
+    "Parag": {"runs": 320, "matches": 9, "wickets": 6},
+    "Nitish": {"runs": 275, "matches": 8, "wickets": 5},
+    "Harshit": {"runs": 50, "matches": 7, "wickets": 10},
+    "Mayank": {"runs": 35, "matches": 6, "wickets": 11}
+}
+
+# 1. Display all player statistics
+print("All Player Statistics:")
+for player, stats in players.items():
+    print(player, stats)
+
+# 2. Highest run scorer
+highest_runs = max(players, key=lambda x: players[x]["runs"])
+print("\nHighest Run Scorer:")
+print(highest_runs, players[highest_runs])
+
+# 3. Lowest run scorer
+lowest_runs = min(players, key=lambda x: players[x]["runs"])
+print("\nLowest Run Scorer:")
+print(lowest_runs, players[lowest_runs])
+
+# 4. Average runs
+total_runs = sum(player["runs"] for player in players.values())
+avg_runs = total_runs / len(players)
+
+print("\nAverage Runs =", round(avg_runs, 2))
+
+# 5. Player with maximum wickets
+max_wickets = max(players, key=lambda x: players[x]["wickets"])
+
+print("\nMaximum Wickets:")
+print(max_wickets, players[max_wickets])
+
+# 6. All-Rounders
+print("\nAll-Rounders:")
+for player, stats in players.items():
+    if stats["runs"] > 300 and stats["wickets"] > 5:
+        print(player, stats)
+
+# 7. Players scoring above average
+print("\nPlayers Scoring Above Average:")
+for player, stats in players.items():
+    if stats["runs"] > avg_runs:
+        print(player, stats)
+
+# 8. Performance Categories
+print("\nPerformance Categories:")
+
+for player, stats in players.items():
+
+    if stats["runs"] >= 500:
+        category = "Star Performer"
+    elif stats["runs"] >= 300:
+        category = "Good Performer"
+    elif stats["runs"] >= 100:
+        category = "Average Performer"
+    else:
+        category = "Poor Performer"
+
+    print(player, ":", category)
+
+# 9. Team Statistics
+total_wickets = sum(player["wickets"] for player in players.values())
+
+print("\nTeam Statistics")
+print("Total Players =", len(players))
+print("Total Runs =", total_runs)
+print("Total Wickets =", total_wickets)
+print("Average Runs =", round(avg_runs, 2))
+
+# 10. Top 5 Batsmen
+print("\nTop 5 Batsmen:")
+
+top_batsmen = sorted(
+    players.items(),
+    key=lambda x: x[1]["runs"],
+    reverse=True
+)[:5]
+
+for player, stats in top_batsmen:
+    print(player, stats)
+
+# 11. Top 5 Bowlers
+print("\nTop 5 Bowlers:")
+
+top_bowlers = sorted(
+    players.items(),
+    key=lambda x: x[1]["wickets"],
+    reverse=True
+)[:5]
+
+for player, stats in top_bowlers:
+    print(player, stats)
+
+# 12. Award Winners Dictionary
+
+award_winners = {
+    "Best Batsman": {
+        highest_runs: players[highest_runs]
+    },
+    "Best Bowler": {
+        max_wickets: players[max_wickets]
+    }
+}
+
+print("\nAward Winners:")
+print(award_winners)
+
+# Challenge: Tournament Report
+
+print("\n========== TOURNAMENT REPORT ==========")
+print("Total Players :", len(players))
+print("Total Runs :", total_runs)
+print("Total Wickets :", total_wickets)
+print("Average Runs :", round(avg_runs, 2))
+print("Best Batsman :", highest_runs)
+print("Best Bowler :", max_wickets)
+print("Top Performer :", highest_runs)
+print("=======================================")

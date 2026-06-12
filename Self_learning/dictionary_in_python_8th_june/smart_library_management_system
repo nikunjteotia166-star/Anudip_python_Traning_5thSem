@@ -1,0 +1,163 @@
+# Smart Library Management System
+
+library = {
+    "B101": {"title": "Python Basics", "author": "ABC", "copies": 5},
+    "B102": {"title": "Data Structures", "author": "John", "copies": 3},
+    "B103": {"title": "Algorithms", "author": "David", "copies": 7},
+    "B104": {"title": "Machine Learning", "author": "Andrew", "copies": 2},
+    "B105": {"title": "AI Fundamentals", "author": "Tom", "copies": 4},
+    "B106": {"title": "Java Programming", "author": "James", "copies": 6},
+    "B107": {"title": "C Programming", "author": "Dennis", "copies": 1},
+    "B108": {"title": "Web Development", "author": "Mark", "copies": 8},
+    "B109": {"title": "Database Systems", "author": "Korth", "copies": 3},
+    "B110": {"title": "Operating System", "author": "Galvin", "copies": 5},
+    "B111": {"title": "Computer Networks", "author": "Tanenbaum", "copies": 2},
+    "B112": {"title": "Cloud Computing", "author": "Raj", "copies": 4},
+    "B113": {"title": "Cyber Security", "author": "William", "copies": 0},
+    "B114": {"title": "Linux Basics", "author": "Robert", "copies": 6},
+    "B115": {"title": "HTML Guide", "author": "Smith", "copies": 7},
+    "B116": {"title": "CSS Mastery", "author": "Clark", "copies": 3},
+    "B117": {"title": "JavaScript", "author": "Brendan", "copies": 5},
+    "B118": {"title": "React JS", "author": "Jordan", "copies": 2},
+    "B119": {"title": "Node JS", "author": "Ryan", "copies": 4},
+    "B120": {"title": "Django", "author": "Adrian", "copies": 1},
+    "B121": {"title": "Flask", "author": "Armin", "copies": 5},
+    "B122": {"title": "PHP Basics", "author": "Rasmus", "copies": 3},
+    "B123": {"title": "Software Engineering", "author": "Pressman", "copies": 8},
+    "B124": {"title": "Data Science", "author": "Joel", "copies": 2},
+    "B125": {"title": "Big Data", "author": "White", "copies": 4},
+    "B126": {"title": "Deep Learning", "author": "Goodfellow", "copies": 1},
+    "B127": {"title": "Computer Graphics", "author": "Hearn", "copies": 6},
+    "B128": {"title": "Compiler Design", "author": "Aho", "copies": 2},
+    "B129": {"title": "Blockchain", "author": "Satoshi", "copies": 0},
+    "B130": {"title": "IoT Concepts", "author": "Kevin", "copies": 5}
+}
+
+# 1. Add a Book
+book_id = input("Enter Book ID: ")
+title = input("Enter Book Title: ")
+author = input("Enter Author Name: ")
+copies = int(input("Enter Copies: "))
+
+library[book_id] = {
+    "title": title,
+    "author": author,
+    "copies": copies
+}
+print("Book Added Successfully")
+
+# 2. Remove a Book
+remove_id = input("\nEnter Book ID to Remove: ")
+
+if remove_id in library:
+    del library[remove_id]
+    print("Book Removed Successfully")
+else:
+    print("Book Not Found")
+
+# 3. Search a Book by ID
+search_id = input("\nEnter Book ID to Search: ")
+
+if search_id in library:
+    print(library[search_id])
+else:
+    print("Book Not Found")
+
+# 4. Search by Title
+search_title = input("\nEnter Book Title: ")
+
+found = False
+for bid, book in library.items():
+    if book["title"].lower() == search_title.lower():
+        print(bid, book)
+        found = True
+
+if not found:
+    print("Book Not Found")
+
+# 5. Update Available Copies
+update_id = input("\nEnter Book ID to Update Copies: ")
+
+if update_id in library:
+    new_copies = int(input("Enter New Copies: "))
+    library[update_id]["copies"] = new_copies
+    print("Copies Updated")
+else:
+    print("Book Not Found")
+
+# 6. Issue a Book
+issue_id = input("\nEnter Book ID to Issue: ")
+
+if issue_id in library:
+    if library[issue_id]["copies"] > 0:
+        library[issue_id]["copies"] -= 1
+        print("Book Issued Successfully")
+    else:
+        print("Book Not Available")
+else:
+    print("Book Not Found")
+
+# 7. Return a Book
+return_id = input("\nEnter Book ID to Return: ")
+
+if return_id in library:
+    library[return_id]["copies"] += 1
+    print("Book Returned Successfully")
+else:
+    print("Book Not Found")
+
+# 8. Books with Fewer than 3 Copies
+print("\nBooks with Less Than 3 Copies:")
+for bid, book in library.items():
+    if book["copies"] < 3:
+        print(bid, book)
+
+# 9. Unavailable Books
+print("\nUnavailable Books:")
+for bid, book in library.items():
+    if book["copies"] == 0:
+        print(bid, book)
+
+# 10. Most Available Book
+most_available = max(library, key=lambda x: library[x]["copies"])
+
+print("\nMost Available Book:")
+print(most_available, library[most_available])
+
+# 11. Restocking Report
+print("\nRestocking Report:")
+for bid, book in library.items():
+    if book["copies"] < 3:
+        print(bid, "-", book["title"], "-", book["copies"], "copies left")
+
+# 12. Books Requiring Immediate Purchase
+purchase_books = {}
+
+for bid, book in library.items():
+    if book["copies"] <= 1:
+        purchase_books[bid] = book
+
+print("\nBooks Requiring Immediate Purchase:")
+for bid, book in purchase_books.items():
+    print(bid, book)
+
+# Challenge: Complete Library Summary Report
+
+total_books = len(library)
+
+available_books = 0
+unavailable_books = 0
+
+for book in library.values():
+    if book["copies"] > 0:
+        available_books += 1
+    else:
+        unavailable_books += 1
+
+print("\n========== LIBRARY SUMMARY REPORT ==========")
+print("Total Books Records :", total_books)
+print("Available Books :", available_books)
+print("Unavailable Books :", unavailable_books)
+print("Most Available Book :", library[most_available]["title"])
+print("Books Needing Restock :", len(purchase_books))
+print("===========================================")
