@@ -1,0 +1,151 @@
+# Online Store Product & Sales Management System
+
+products = {
+    "P101": {"name": "Laptop", "price": 55000, "stock": 12, "sold": 25},
+    "P102": {"name": "Mouse", "price": 500, "stock": 20, "sold": 40},
+    "P103": {"name": "Keyboard", "price": 1200, "stock": 15, "sold": 18},
+    "P104": {"name": "Monitor", "price": 10000, "stock": 8, "sold": 12},
+    "P105": {"name": "Printer", "price": 8000, "stock": 4, "sold": 9},
+    "P106": {"name": "Scanner", "price": 6000, "stock": 3, "sold": 5},
+    "P107": {"name": "Speaker", "price": 2500, "stock": 10, "sold": 22},
+    "P108": {"name": "Headphone", "price": 1800, "stock": 6, "sold": 30},
+    "P109": {"name": "Webcam", "price": 2200, "stock": 2, "sold": 7},
+    "P110": {"name": "Pen Drive", "price": 700, "stock": 25, "sold": 35},
+    "P111": {"name": "SSD", "price": 4500, "stock": 7, "sold": 20},
+    "P112": {"name": "Hard Disk", "price": 5000, "stock": 5, "sold": 15},
+    "P113": {"name": "Router", "price": 3000, "stock": 9, "sold": 14},
+    "P114": {"name": "Smart Watch", "price": 7000, "stock": 11, "sold": 28},
+    "P115": {"name": "Tablet", "price": 20000, "stock": 4, "sold": 8},
+    "P116": {"name": "Mobile", "price": 25000, "stock": 13, "sold": 45},
+    "P117": {"name": "Charger", "price": 600, "stock": 18, "sold": 38},
+    "P118": {"name": "Power Bank", "price": 1500, "stock": 14, "sold": 19},
+    "P119": {"name": "Camera", "price": 35000, "stock": 3, "sold": 6},
+    "P120": {"name": "Tripod", "price": 1200, "stock": 8, "sold": 10},
+    "P121": {"name": "Projector", "price": 30000, "stock": 2, "sold": 4},
+    "P122": {"name": "Microphone", "price": 2800, "stock": 7, "sold": 11},
+    "P123": {"name": "UPS", "price": 5000, "stock": 6, "sold": 13},
+    "P124": {"name": "Graphics Card", "price": 40000, "stock": 5, "sold": 16},
+    "P125": {"name": "CPU", "price": 18000, "stock": 9, "sold": 21},
+    "P126": {"name": "RAM", "price": 3500, "stock": 12, "sold": 24},
+    "P127": {"name": "Motherboard", "price": 9000, "stock": 4, "sold": 12},
+    "P128": {"name": "Cooling Fan", "price": 800, "stock": 15, "sold": 17},
+    "P129": {"name": "Bluetooth Speaker", "price": 2200, "stock": 1, "sold": 9},
+    "P130": {"name": "Gaming Console", "price": 45000, "stock": 0, "sold": 3}
+}
+
+# 1. Display all products
+print("All Products:")
+for pid, details in products.items():
+    print(pid, details)
+
+# 2. Add a new product
+pid = input("\nEnter Product ID: ")
+name = input("Enter Product Name: ")
+price = int(input("Enter Price: "))
+stock = int(input("Enter Stock: "))
+sold = int(input("Enter Sold Quantity: "))
+
+products[pid] = {
+    "name": name,
+    "price": price,
+    "stock": stock,
+    "sold": sold
+}
+print("Product Added Successfully")
+
+# 3. Update stock after sales
+pid = input("\nEnter Product ID for Sale: ")
+
+if pid in products:
+    qty = int(input("Enter Quantity Sold: "))
+
+    if qty <= products[pid]["stock"]:
+        products[pid]["stock"] -= qty
+        products[pid]["sold"] += qty
+        print("Stock Updated")
+    else:
+        print("Insufficient Stock")
+else:
+    print("Product Not Found")
+
+# 4. Out-of-stock products
+print("\nOut of Stock Products:")
+for pid, product in products.items():
+    if product["stock"] == 0:
+        print(pid, product)
+
+# 5. Products with stock less than 5
+print("\nProducts with Stock Less Than 5:")
+for pid, product in products.items():
+    if product["stock"] < 5:
+        print(pid, product)
+
+# 6. Total inventory value
+inventory_value = 0
+
+for product in products.values():
+    inventory_value += product["price"] * product["stock"]
+
+print("\nTotal Inventory Value =", inventory_value)
+
+# 7. Best-selling product
+best = max(products, key=lambda x: products[x]["sold"])
+print("\nBest Selling Product:")
+print(best, products[best])
+
+# 8. Least-selling product
+least = min(products, key=lambda x: products[x]["sold"])
+print("\nLeast Selling Product:")
+print(least, products[least])
+
+# 9. Total revenue generated
+revenue = 0
+
+for product in products.values():
+    revenue += product["price"] * product["sold"]
+
+print("\nTotal Revenue =", revenue)
+
+# 10. Low-stock report
+print("\nLow Stock Report:")
+for pid, product in products.items():
+    if product["stock"] < 5:
+        print(pid, "-", product["name"], "-", product["stock"])
+
+# 11. Products whose sales exceed average sales
+total_sales = sum(product["sold"] for product in products.values())
+avg_sales = total_sales / len(products)
+
+print("\nProducts Above Average Sales:")
+for pid, product in products.items():
+    if product["sold"] > avg_sales:
+        print(pid, product)
+
+# 12. Promotion Eligible Products (sales < 10)
+promotion_products = {}
+
+for pid, product in products.items():
+    if product["sold"] < 10:
+        promotion_products[pid] = product
+
+print("\nPromotion Eligible Products:")
+for pid, product in promotion_products.items():
+    print(pid, product)
+
+# Challenge: Complete Business Report
+print("\n========== BUSINESS REPORT ==========")
+print("Total Products :", len(products))
+print("Inventory Value :", inventory_value)
+print("Total Revenue :", revenue)
+print("Average Sales :", round(avg_sales, 2))
+print("Best Seller :", products[best]["name"])
+print("Least Seller :", products[least]["name"])
+print("Out of Stock Products :", end=" ")
+
+count = 0
+for product in products.values():
+    if product["stock"] == 0:
+        count += 1
+
+print(count)
+print("=====================================")
