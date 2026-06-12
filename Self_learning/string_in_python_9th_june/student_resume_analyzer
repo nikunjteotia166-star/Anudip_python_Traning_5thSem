@@ -1,0 +1,150 @@
+# Student Resume Analyzer
+
+resume = """
+Name: Rahul Sharma
+Email: rahul123@gmail.com
+Phone: 9876543210
+
+Education:
+B.Tech Computer Science
+
+Skills:
+Python SQL Java React Python SQL Communication Teamwork
+
+Projects:
+Library Management System
+Student Result Analyzer
+Web Development Project
+
+Achievements:
+Hackathon Winner
+Coding Competition Finalist
+Python Certified Developer
+"""
+
+# 1. Count total words
+words = resume.split()
+print("Total Words :", len(words))
+
+# 2. Count total characters
+print("Total Characters :", len(resume))
+
+# 3. Extract Email IDs
+emails = []
+
+for word in words:
+    if "@" in word and "." in word:
+        emails.append(word)
+
+print("Email Found :", len(emails))
+print(emails)
+
+# 4. Extract Phone Numbers
+phones = []
+
+for word in words:
+    if word.isdigit() and len(word) == 10:
+        phones.append(word)
+
+print("Phone Numbers Found :", len(phones))
+print(phones)
+
+# 5. Count Skills Mentioned
+skill_list = [
+    "python", "sql", "java", "react",
+    "communication", "teamwork"
+]
+
+skill_count = 0
+skill_freq = {}
+
+for word in words:
+
+    clean_word = word.lower().strip(",.:")
+
+    if clean_word in skill_list:
+
+        skill_count += 1
+
+        if clean_word in skill_freq:
+            skill_freq[clean_word] += 1
+        else:
+            skill_freq[clean_word] = 1
+
+print("Skills Mentioned :", skill_count)
+
+# 6. Find Repeated Keywords
+print("\nRepeated Keywords:")
+
+for skill, count in skill_freq.items():
+    if count > 1:
+        print(skill, "->", count)
+
+# 7. Most Frequently Used Skill
+max_skill = ""
+max_count = 0
+
+for skill, count in skill_freq.items():
+
+    if count > max_count:
+        max_count = count
+        max_skill = skill
+
+print("\nMost Frequent Skill :", max_skill)
+
+# 8. Skill Frequency Report
+print("\nSkill Frequency Report")
+
+for skill, count in skill_freq.items():
+    print(skill, "->", count)
+
+# 9. Detect Duplicate Skills
+print("\nDuplicate Skills")
+
+for skill, count in skill_freq.items():
+
+    if count > 1:
+        print(skill)
+
+# 10. Summary Dashboard
+
+# Word Frequency Dictionary
+freq = {}
+
+for word in words:
+
+    word = word.lower().strip(",.:")
+
+    if word in freq:
+        freq[word] += 1
+    else:
+        freq[word] = 1
+
+# Top 5 Keywords (without sorting)
+print("\nTop 5 Keywords:")
+
+temp = freq.copy()
+
+for i in range(5):
+
+    max_word = ""
+    max_count = 0
+
+    for word, count in temp.items():
+
+        if count > max_count:
+            max_count = count
+            max_word = word
+
+    print(max_word, "->", max_count)
+
+    del temp[max_word]
+
+# Final Dashboard
+print("\n===== RESUME ANALYSIS REPORT =====")
+print("Total Words :", len(words))
+print("Total Characters :", len(resume))
+print("Email Found :", len(emails))
+print("Phone Numbers Found :", len(phones))
+print("Most Frequent Skill :", max_skill.title())
+print("=================================")
