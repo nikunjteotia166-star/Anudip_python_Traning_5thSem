@@ -1,0 +1,164 @@
+# News Article Text Analyzer
+
+article = """
+Technology is changing the world at a very fast pace. Modern technology is helping
+people communicate, learn, work, and travel more efficiently. The internet has become
+an important part of daily life. Students use technology for education and research.
+Businesses use technology to improve productivity and provide better services.
+
+Artificial intelligence is one of the most important developments in technology.
+Artificial intelligence is being used in healthcare, banking, transportation,
+education, and entertainment. Many companies are investing heavily in artificial
+intelligence because it can improve decision making and automate repetitive tasks.
+
+Climate change is another major issue discussed around the world. Governments,
+organizations, and citizens are working together to reduce pollution and protect
+natural resources. Renewable energy sources such as solar energy and wind energy
+are becoming more popular. These energy sources help reduce dependence on fossil fuels.
+
+Education plays a significant role in the development of society. Good education
+helps individuals gain knowledge and skills. Schools and universities are adopting
+digital learning methods. Online education platforms provide opportunities for
+students to learn from anywhere in the world.
+
+Sports also contribute to personal growth and national pride. International sports
+events bring people together and encourage healthy competition. Athletes work hard
+to achieve success and inspire others. Sports improve physical fitness and mental
+well being.
+
+Technology, education, environment, and sports are important areas that influence
+modern society. Continuous innovation and responsible actions can help create a
+better future for everyone. People must work together to solve challenges and
+promote sustainable development.
+"""
+
+# 1. Total characters
+print("Total Characters :", len(article))
+
+# 2. Total words
+words = article.split()
+print("Total Words :", len(words))
+
+# 3. Total sentences
+sentences = article.count(".")
+print("Total Sentences :", sentences)
+
+# 4. Count vowels and consonants
+vowels = 0
+consonants = 0
+
+for ch in article.lower():
+
+    if ch.isalpha():
+
+        if ch in "aeiou":
+            vowels += 1
+        else:
+            consonants += 1
+
+print("Vowels :", vowels)
+print("Consonants :", consonants)
+
+# 5. Longest word
+longest_word = words[0]
+
+for word in words:
+
+    clean_word = word.strip(".,!?")
+
+    if len(clean_word) > len(longest_word):
+        longest_word = clean_word
+
+print("Longest Word :", longest_word)
+
+# 6. Shortest word
+shortest_word = words[0]
+
+for word in words:
+
+    clean_word = word.strip(".,!?")
+
+    if len(clean_word) < len(shortest_word):
+        shortest_word = clean_word
+
+print("Shortest Word :", shortest_word)
+
+# 7 & 8. Word Frequency Dictionary
+freq = {}
+
+for word in words:
+
+    word = word.lower().strip(".,!?")
+
+    if word in freq:
+        freq[word] += 1
+    else:
+        freq[word] = 1
+
+# Most frequent word
+max_word = ""
+max_count = 0
+
+for word, count in freq.items():
+
+    if count > max_count:
+        max_count = count
+        max_word = word
+
+print("Most Frequent Word :", max_word)
+
+print("\nWord Frequency Dictionary")
+print(freq)
+
+# 9. Words appearing only once
+print("\nWords Appearing Only Once:")
+
+for word, count in freq.items():
+
+    if count == 1:
+        print(word)
+
+# 10. Words appearing more than 5 times
+print("\nWords Appearing More Than 5 Times:")
+
+for word, count in freq.items():
+
+    if count > 5:
+        print(word, "->", count)
+
+# 11. Count words starting with each alphabet
+alphabet_count = {}
+
+for word in freq:
+
+    first = word[0]
+
+    if first in alphabet_count:
+        alphabet_count[first] += 1
+    else:
+        alphabet_count[first] = 1
+
+print("\nWords Starting With Each Alphabet:")
+print(alphabet_count)
+
+# 12. Display unique words
+print("\nUnique Words:")
+
+for word in freq:
+    print(word)
+
+# Challenge: Text Summary
+
+total_length = 0
+
+for word in words:
+    total_length += len(word.strip(".,!?"))
+
+average_word_length = total_length / len(words)
+
+print("\n===== TEXT SUMMARY =====")
+print("Total Words :", len(words))
+print("Total Sentences :", sentences)
+print("Average Word Length :", round(average_word_length, 2))
+print("Most Frequent Word :", max_word)
+print("Vocabulary Size :", len(freq))
