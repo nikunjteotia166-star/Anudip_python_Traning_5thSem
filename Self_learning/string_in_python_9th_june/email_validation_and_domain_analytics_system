@@ -1,0 +1,64 @@
+# Email Validation & Domain Analytics System
+
+domain_count = {}
+invalid_emails = []
+
+# Input 20 emails
+for i in range(20):
+
+    email = input(f"\nEnter Email {i+1}: ")
+
+    # Check validity
+    if email.count("@") == 1 and "." in email and " " not in email:
+
+        # Extract username
+        username = email.split("@")[0]
+
+        # Extract domain
+        domain = email.split("@")[1]
+
+        # Extract extension
+        extension = domain.split(".")[-1]
+
+        # Count digits in username
+        digit_count = 0
+
+        for ch in username:
+            if ch.isdigit():
+                digit_count += 1
+
+        # Count special characters in username
+        special_count = 0
+
+        for ch in username:
+            if not ch.isalnum():
+                special_count += 1
+
+        # Store domain count
+        if domain in domain_count:
+            domain_count[domain] += 1
+        else:
+            domain_count[domain] = 1
+
+        # Display analysis
+        print("\n----- EMAIL REPORT -----")
+        print("Username :", username)
+        print("Domain :", domain)
+        print("Extension :", extension)
+        print("Digits in Username :", digit_count)
+        print("Special Characters :", special_count)
+        print("Valid Email")
+
+    else:
+        invalid_emails.append(email)
+        print("Invalid Email")
+
+# Display invalid emails
+print("\n===== INVALID EMAILS =====")
+for email in invalid_emails:
+    print(email)
+
+# Domain Report
+print("\n===== DOMAIN REPORT =====")
+for domain, count in domain_count.items():
+    print(domain, "->", count, "users")
