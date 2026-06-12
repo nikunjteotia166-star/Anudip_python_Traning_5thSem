@@ -1,0 +1,164 @@
+# City Population & Development Dashboard
+
+cities = {
+    "Delhi": {"population": 32000000, "area": 1484, "literacy": 89},
+    "Mumbai": {"population": 21000000, "area": 603, "literacy": 91},
+    "Kolkata": {"population": 15000000, "area": 206, "literacy": 88},
+    "Chennai": {"population": 11000000, "area": 426, "literacy": 90},
+    "Bangalore": {"population": 13000000, "area": 709, "literacy": 92},
+    "Hyderabad": {"population": 10500000, "area": 650, "literacy": 89},
+    "Pune": {"population": 7500000, "area": 518, "literacy": 91},
+    "Ahmedabad": {"population": 8500000, "area": 505, "literacy": 87},
+    "Jaipur": {"population": 4200000, "area": 467, "literacy": 84},
+    "Lucknow": {"population": 3800000, "area": 631, "literacy": 82},
+    "Kanpur": {"population": 3100000, "area": 403, "literacy": 81},
+    "Nagpur": {"population": 2900000, "area": 227, "literacy": 88},
+    "Indore": {"population": 3300000, "area": 530, "literacy": 86},
+    "Bhopal": {"population": 2500000, "area": 463, "literacy": 85},
+    "Patna": {"population": 2700000, "area": 250, "literacy": 80},
+    "Surat": {"population": 7000000, "area": 326, "literacy": 90},
+    "Agra": {"population": 1800000, "area": 188, "literacy": 79},
+    "Meerut": {"population": 1600000, "area": 142, "literacy": 78},
+    "Varanasi": {"population": 1500000, "area": 112, "literacy": 83},
+    "Prayagraj": {"population": 1400000, "area": 82, "literacy": 82},
+    "Noida": {"population": 900000, "area": 203, "literacy": 91},
+    "Gurugram": {"population": 1000000, "area": 232, "literacy": 90},
+    "Faridabad": {"population": 1400000, "area": 189, "literacy": 85},
+    "Ludhiana": {"population": 1700000, "area": 159, "literacy": 86},
+    "Amritsar": {"population": 1200000, "area": 139, "literacy": 84},
+    "Jodhpur": {"population": 1300000, "area": 233, "literacy": 82},
+    "Udaipur": {"population": 700000, "area": 64, "literacy": 89},
+    "Dehradun": {"population": 800000, "area": 196, "literacy": 92},
+    "Ranchi": {"population": 1500000, "area": 175, "literacy": 87},
+    "Raipur": {"population": 1200000, "area": 226, "literacy": 88}
+}
+
+while True:
+
+    # Menu
+    print("\n===== CITY DASHBOARD =====")
+    print("1. Display All Cities")
+    print("2. Most Populated City")
+    print("3. Least Populated City")
+    print("4. Average Population")
+    print("5. Cities with Literacy > 90")
+    print("6. Population Density")
+    print("7. Highest Density City")
+    print("8. City Categories")
+    print("9. National Report")
+    print("0. Exit")
+
+    choice = int(input("Enter Choice: "))
+
+    # 1. Display all city details
+    if choice == 1:
+        for city, data in cities.items():
+            print(city, data)
+
+    # 2. Most populated city
+    elif choice == 2:
+        max_city = ""
+        max_pop = 0
+
+        for city, data in cities.items():
+            if data["population"] > max_pop:
+                max_pop = data["population"]
+                max_city = city
+
+        print("Most Populated City =", max_city)
+
+    # 3. Least populated city
+    elif choice == 3:
+        first = True
+
+        for city, data in cities.items():
+
+            if first:
+                min_city = city
+                min_pop = data["population"]
+                first = False
+
+            elif data["population"] < min_pop:
+                min_pop = data["population"]
+                min_city = city
+
+        print("Least Populated City =", min_city)
+
+    # 4. Average population
+    elif choice == 4:
+        total = 0
+
+        for data in cities.values():
+            total += data["population"]
+
+        avg = total / len(cities)
+
+        print("Average Population =", avg)
+
+    # 5. Literacy above 90%
+    elif choice == 5:
+        print("High Literacy Cities")
+
+        for city, data in cities.items():
+            if data["literacy"] > 90:
+                print(city)
+
+    # 6. Population density
+    elif choice == 6:
+        print("Population Density")
+
+        for city, data in cities.items():
+            density = data["population"] / data["area"]
+            print(city, "=", round(density, 2))
+
+    # 7. Highest density city
+    elif choice == 7:
+        max_density = 0
+        max_city = ""
+
+        for city, data in cities.items():
+
+            density = data["population"] / data["area"]
+
+            if density > max_density:
+                max_density = density
+                max_city = city
+
+        print("Highest Density City =", max_city)
+
+    # 8. Categorize cities
+    elif choice == 8:
+
+        for city, data in cities.items():
+
+            if data["population"] < 1000000:
+                category = "Small"
+
+            elif data["population"] <= 5000000:
+                category = "Medium"
+
+            else:
+                category = "Large"
+
+            print(city, ":", category)
+
+    # 9. National summary report
+    elif choice == 9:
+
+        total_pop = 0
+
+        for data in cities.values():
+            total_pop += data["population"]
+
+        print("\n===== NATIONAL REPORT =====")
+        print("Total Cities =", len(cities))
+        print("Total Population =", total_pop)
+        print("Average Population =", total_pop / len(cities))
+
+    # Exit
+    elif choice == 0:
+        print("Program Ended")
+        break
+
+    else:
+        print("Invalid Choice")
