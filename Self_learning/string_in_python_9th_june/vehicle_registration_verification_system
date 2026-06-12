@@ -1,0 +1,78 @@
+# Vehicle Registration Verification System
+
+vehicles = [
+    "MH12AB4589", "MH14CD5678", "MH20EF1234",
+    "MH10GH9876", "MH15JK4567", "MH22LM7890",
+    "DL05XY9988", "DL03AB1234", "DL08CD5678",
+    "DL10EF4321",
+    "KA03PQ1234", "KA05RS5678", "KA09TU1111",
+    "KA11VW2222", "KA15XY3333",
+    "UP32AB4567", "UP14CD7890", "UP16EF2345",
+    "UP25GH6789", "UP70JK1234"
+]
+
+state_count = {}
+invalid = []
+
+for reg in vehicles:
+
+    # 1. Extract state code
+    state = reg[:2]
+
+    # 2. Extract district code
+    district = reg[2:4]
+
+    # 3. Extract series
+    series = reg[4:6]
+
+    # 4. Extract vehicle number
+    vehicle_no = reg[6:]
+
+    # 5. Count letters and digits
+    letters = 0
+    digits = 0
+
+    for ch in reg:
+        if ch.isalpha():
+            letters += 1
+        elif ch.isdigit():
+            digits += 1
+
+    print("\nRegistration :", reg)
+    print("State Code :", state)
+    print("District Code :", district)
+    print("Series :", series)
+    print("Vehicle Number :", vehicle_no)
+    print("Letters :", letters)
+    print("Digits :", digits)
+
+    # 6. Validate format
+    if (len(reg) == 10 and
+        reg[:2].isalpha() and
+        reg[2:4].isdigit() and
+        reg[4:6].isalpha() and
+        reg[6:].isdigit()):
+
+        print("Valid Registration")
+
+        # 8. Count state-wise vehicles
+        if state in state_count:
+            state_count[state] += 1
+        else:
+            state_count[state] = 1
+
+    else:
+        print("Invalid Registration")
+        invalid.append(reg)
+
+# 7. Display invalid registrations
+print("\n===== INVALID REGISTRATIONS =====")
+
+for reg in invalid:
+    print(reg)
+
+# Challenge: State-wise Report
+print("\n===== STATE-WISE REPORT =====")
+
+for state, count in state_count.items():
+    print(state, "->", count, "Vehicles")
