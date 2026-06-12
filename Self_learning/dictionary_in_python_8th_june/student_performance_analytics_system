@@ -1,0 +1,144 @@
+# Student Performance Analytics System
+
+students = {
+    "S101": {"name": "Anuj", "marks": 85},
+    "S102": {"name": "Rahul", "marks": 72},
+    "S103": {"name": "Priya", "marks": 91},
+    "S104": {"name": "Rohan", "marks": 67},
+    "S105": {"name": "Kavya", "marks": 95},
+    "S106": {"name": "Aman", "marks": 48},
+    "S107": {"name": "Neha", "marks": 78},
+    "S108": {"name": "Vikas", "marks": 56},
+    "S109": {"name": "Pooja", "marks": 88},
+    "S110": {"name": "Arjun", "marks": 39},
+    "S111": {"name": "Nitin", "marks": 82},
+    "S112": {"name": "Simran", "marks": 93},
+    "S113": {"name": "Deepak", "marks": 45},
+    "S114": {"name": "Megha", "marks": 76},
+    "S115": {"name": "Karan", "marks": 69},
+    "S116": {"name": "Sakshi", "marks": 87},
+    "S117": {"name": "Ritika", "marks": 58},
+    "S118": {"name": "Yash", "marks": 99},
+    "S119": {"name": "Aditi", "marks": 81},
+    "S120": {"name": "Mohit", "marks": 62},
+    "S121": {"name": "Isha", "marks": 74},
+    "S122": {"name": "Varun", "marks": 52},
+    "S123": {"name": "Tanvi", "marks": 97},
+    "S124": {"name": "Harsh", "marks": 41},
+    "S125": {"name": "Sneha", "marks": 89},
+    "S126": {"name": "Ravi", "marks": 66},
+    "S127": {"name": "Payal", "marks": 54},
+    "S128": {"name": "Ayush", "marks": 92},
+    "S129": {"name": "Komal", "marks": 83},
+    "S130": {"name": "Manav", "marks": 47}
+}
+
+# 1. Display all student records
+print("All Student Records:")
+for sid, details in students.items():
+    print(sid, details)
+
+# 2. Search a student using Student ID
+sid = input("\nEnter Student ID to search: ")
+if sid in students:
+    print("Student Found:", students[sid])
+else:
+    print("Student not found")
+
+# 3. Add a new student
+new_id = input("\nEnter New Student ID: ")
+name = input("Enter Name: ")
+marks = int(input("Enter Marks: "))
+students[new_id] = {"name": name, "marks": marks}
+print("Student Added Successfully")
+
+# 4. Update marks of an existing student
+update_id = input("\nEnter Student ID to update marks: ")
+if update_id in students:
+    new_marks = int(input("Enter New Marks: "))
+    students[update_id]["marks"] = new_marks
+    print("Marks Updated")
+else:
+    print("Student not found")
+
+# 5. Delete a student
+delete_id = input("\nEnter Student ID to delete: ")
+if delete_id in students:
+    del students[delete_id]
+    print("Student Deleted")
+else:
+    print("Student not found")
+
+# 6. Find topper and lowest scorer
+topper = max(students, key=lambda x: students[x]["marks"])
+lowest = min(students, key=lambda x: students[x]["marks"])
+
+print("\nTopper:")
+print(topper, students[topper])
+
+print("\nLowest Scorer:")
+print(lowest, students[lowest])
+
+# 7. Calculate class average
+total_marks = sum(student["marks"] for student in students.values())
+average = total_marks / len(students)
+
+print("\nClass Average =", round(average, 2))
+
+# 8. Count pass and fail students
+pass_count = 0
+fail_count = 0
+
+for student in students.values():
+    if student["marks"] >= 50:
+        pass_count += 1
+    else:
+        fail_count += 1
+
+print("\nPass Students =", pass_count)
+print("Fail Students =", fail_count)
+
+# 9. Generate Grades
+print("\nStudent Grades:")
+for sid, student in students.items():
+    marks = student["marks"]
+
+    if marks >= 90:
+        grade = "A"
+    elif marks >= 75:
+        grade = "B"
+    elif marks >= 50:
+        grade = "C"
+    else:
+        grade = "F"
+
+    print(sid, "-", student["name"], ":", grade)
+
+# 10. Display students scoring above average
+print("\nStudents Scoring Above Average:")
+for sid, student in students.items():
+    if student["marks"] > average:
+        print(sid, student)
+
+# 11. Display Top 5 Performers
+print("\nTop 5 Performers:")
+
+top5 = sorted(
+    students.items(),
+    key=lambda x: x[1]["marks"],
+    reverse=True
+)[:5]
+
+for sid, student in top5:
+    print(sid, student)
+
+# 12. Scholarship Students (marks > 85)
+scholarship_students = {}
+
+for sid, student in students.items():
+    if student["marks"] > 85:
+        scholarship_students[sid] = student
+
+print("\nScholarship Students:")
+for sid, student in scholarship_students.items():
+    print(sid, student)
